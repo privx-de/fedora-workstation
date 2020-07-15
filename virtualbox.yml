@@ -1,0 +1,11 @@
+- hosts: localhost
+  vars_files:
+    - vars/main.yml
+  tasks:
+    - name: Include role virtualbox
+      include_role:
+        name: virtualbox
+      vars:
+        virtualbox:
+          user: "{{ workstation.login }}"
+          version: 6.1

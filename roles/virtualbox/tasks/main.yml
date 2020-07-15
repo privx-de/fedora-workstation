@@ -1,0 +1,35 @@
+- name: Create /etc/yum.repos.d/virtualbox.repo
+  copy:
+    dest: /etc/yum.repos.d/virtualbox.repo
+    owner: root
+    group: root
+    mode: 0644
+    content: |
+      [virtualbox]
+      name=Fedora $releasever - $basearch - VirtualBox
+      baseurl=http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch
+      enabled=1
+      gpgcheck=1
+      repo_gpgcheck=1
+      gpgkey=https://www.virtualbox.org/download/oracle_vbox.asc
+
+- name: Add Oracle VirtualBox GPG key to rpm database
+  rpm_key:
+    state: present
+    key: https://www.virtualbox.org/download/oracle_vbox.asc
+
+- name: dnf install VirtualBox-{{ virtualbox.version }}
+  dnf:
+    name: VirtualBox-{{ virtualbox.version }}
+    state: latest
+
+- name: /usr/lib/virtualbox/vboxdrv.sh setup
+  command: /usr/lib/virtualbox/vboxdrv.sh setup
+  args:
+    creates: /lib/modules/{{ ansible_kernel }}/misc/vboxdrv.ko
+
+- name: Add {{ virtualbox.user }} to vboxusers group
+  user:
+    name: "{{ virtualbox.user }}"
+    groups: vboxusers
+    append: yes
