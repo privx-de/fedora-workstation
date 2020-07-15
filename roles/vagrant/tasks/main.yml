@@ -1,0 +1,12 @@
+- name: Download Vagrant
+  unarchive:
+    src: https://releases.hashicorp.com/vagrant/{{ vagrant.version }}/vagrant_{{ vagrant.version }}_linux_amd64.zip
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: File permissons /usr/local/bin/vagrant
+  file:
+    path: /usr/local/bin/vagrant
+    owner: root
+    group: root
+    mode: 0755

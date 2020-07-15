@@ -1,0 +1,8 @@
+- hosts: localhost
+  tasks:
+    - name: Include role vagrant
+      include_role:
+        name: vagrant
+      vars:
+        vagrant:
+          version: 2.2.9
