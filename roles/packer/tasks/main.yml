@@ -1,0 +1,12 @@
+- name: Download Packer
+  unarchive:
+    src: https://releases.hashicorp.com/packer/{{ packer.version }}/packer_{{ packer.version }}_linux_amd64.zip
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: File permissons /usr/local/bin/packer
+  file:
+    path: /usr/local/bin/packer
+    owner: root
+    group: root
+    mode: 0755

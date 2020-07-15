@@ -1,0 +1,8 @@
+- hosts: localhost
+  tasks:
+    - name: Include role packer
+      include_role:
+        name: packer
+      vars:
+        packer:
+          version: 1.6.0
