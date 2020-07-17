@@ -28,6 +28,16 @@
   args:
     creates: /lib/modules/{{ ansible_kernel }}/misc/vboxdrv.ko
 
+- name: Create /etc/modules-load.d/virtualbox.conf
+  copy:
+    dest: /etc/yum.repos.d/virtualbox.repo
+    owner: root
+    group: root
+    mode: 0644
+    content: |
+      # Load vboxsf at boot
+      vboxsf
+
 - name: Add {{ virtualbox.user }} to vboxusers group
   user:
     name: "{{ virtualbox.user }}"
