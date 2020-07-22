@@ -30,7 +30,7 @@
 
 - name: Create /etc/modules-load.d/virtualbox.conf
   copy:
-    dest: /etc/yum.repos.d/virtualbox.repo
+    dest: /etc/modules-load.d/virtualbox.conf
     owner: root
     group: root
     mode: 0644
