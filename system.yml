@@ -1,0 +1,20 @@
+- hosts: localhost
+  tasks:
+
+  - name: Remove default packages
+    dnf:
+      name:
+      - audit
+      - abrt
+      - cups
+      - gnome-software
+      - PackageKit
+      - pcsc-lite
+      - sssd-common
+      state: absent
+
+  - name: Install basic tools
+    dnf:
+      name:
+      - neovim
+      state: latest
