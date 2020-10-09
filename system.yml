@@ -5,9 +5,11 @@
     dnf:
       name:
       - audit
+      - avahi
       - abrt
       - cups
       - gnome-software
+      - gnome-terminal
       - PackageKit
       - pcsc-lite
       - sssd-common
@@ -16,5 +18,25 @@
   - name: Install basic tools
     dnf:
       name:
+      - ansible
+      - bcache-tools
+      - btrfs-progs
+      - dpkg
+      - enpass
+      - evolution
+      - evolution-etesync
+      - gnome-shell-extension-appindicator
+      - gnome-tweaks
+      - grub2-efi-x64
+      - grub2-tools
+      - lpf-spotify-client
+      - mdadm
       - neovim
+      - python3-dnf-plugin-snapper
+      - rpmfusion-free-release-tainted
+      - rpmfusion-nonfree-release-tainted
+      - shim-x64
+      - snapper
+      - strace
+      - tilix
       state: latest
