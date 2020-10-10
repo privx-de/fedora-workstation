@@ -8,11 +8,15 @@
       - avahi
       - abrt
       - cups
+      - gnome-maps
+      - gnome-photos
       - gnome-software
       - gnome-terminal
       - PackageKit
       - pcsc-lite
+      - rhythmbox
       - sssd-common
+      - totem
       state: absent
 
   - name: Install basic tools
@@ -21,17 +25,22 @@
       - ansible
       - bcache-tools
       - btrfs-progs
+      - chromium-browser-privacy
       - dpkg
       - enpass
       - evolution
       - evolution-etesync
       - gnome-shell-extension-appindicator
       - gnome-tweaks
+      - google-chrome-stable
       - grub2-efi-x64
       - grub2-tools
+      - htop
       - lpf-spotify-client
       - mdadm
       - neovim
+      - openssl
+      - podman
       - python3-dnf-plugin-snapper
       - rpmfusion-free-release-tainted
       - rpmfusion-nonfree-release-tainted
@@ -39,4 +48,24 @@
       - snapper
       - strace
       - tilix
+      - zsh
       state: latest
+
+  - name: profile.d alias.sh
+    copy:
+      dest: /etc/profile.d/alias.sh
+      content: |
+        # /etc/profile.d/alias.sh
+        alias docker='podman'
+        alias dnf='sudo dnf'
+        alias neovim='nvim'
+        alias vi='nvim'
+        alias vim='nvim'
+
+  - name: Symlink WidevineCdm to Chromium
+    file:
+      src: /opt/google/chrome/WidevineCdm
+      dest: /usr/lib64/chromium-browser-privacy/WidevineCdm
+      owner: root
+      group: root
+      state: link
