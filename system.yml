@@ -1,6 +1,18 @@
 - hosts: localhost
   tasks:
 
+  - name: Add kubernetes.repo
+    copy:
+      dest: /etc/yum.repos.d/kubernetes.repo
+      content: |
+        [kubernetes]
+        name=Kubernetes
+        baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        enabled=1
+        gpgcheck=1
+        repo_gpgcheck=1
+        gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
   - name: Remove default packages
     dnf:
       name:
@@ -22,32 +34,43 @@
   - name: Install basic tools
     dnf:
       name:
+      - android-tools
       - ansible
+      - bat # cat(1) clone with wings
+      - bats # Bash Automated Testing System
       - bcache-tools
       - btrfs-progs
       - chromium-browser-privacy
+      - conda
+      - curl
       - dpkg
       - enpass
       - evolution
       - evolution-etesync
+      - fd-find
       - gnome-shell-extension-appindicator
       - gnome-tweaks
       - google-chrome-stable
       - grub2-efi-x64
       - grub2-tools
       - htop
+      - kubectl
       - lpf-spotify-client
+      - nmap
       - mdadm
       - neovim
       - openssl
       - podman
       - python3-dnf-plugin-snapper
+      - ripgrep
       - rpmfusion-free-release-tainted
       - rpmfusion-nonfree-release-tainted
       - shim-x64
       - snapper
       - strace
+      - tig
       - tilix
+      - wget
       - zsh
       state: latest
 
@@ -58,6 +81,7 @@
         # /etc/profile.d/alias.sh
         alias docker='podman'
         alias dnf='sudo dnf'
+        alias k='kubectl'
         alias neovim='nvim'
         alias vi='nvim'
         alias vim='nvim'
