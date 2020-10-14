@@ -22,6 +22,7 @@
       - cups
       - gnome-maps
       - gnome-photos
+      - gnome-remote-desktop
       - gnome-software
       - gnome-terminal
       - PackageKit
@@ -44,6 +45,7 @@
       - conda
       - curl
       - dpkg
+      - emacs
       - enpass
       - evolution
       - evolution-etesync
@@ -54,6 +56,8 @@
       - grub2-efi-x64
       - grub2-tools
       - htop
+      - jq
+      - iotop
       - kubectl
       - lpf-spotify-client
       - nmap
@@ -61,7 +65,9 @@
       - neovim
       - openssl
       - podman
+      - pulseeffects
       - python3-dnf-plugin-snapper
+      - python3-language-server
       - ripgrep
       - rpmfusion-free-release-tainted
       - rpmfusion-nonfree-release-tainted
@@ -93,3 +99,20 @@
       owner: root
       group: root
       state: link
+
+  - name: /etc/default/grub
+    vars:
+      crypt_root: /dev/bcache0
+    copy:
+      dest: /etc/default/grub
+      content: |
+        GRUB_TIMEOUT=5
+        GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+        GRUB_DEFAULT=saved
+        GRUB_DISABLE_SUBMENU=true
+        GRUB_TERMINAL_OUTPUT="console"
+        GRUB_CMDLINE_LINUX="rd.luks.uuid=$(blkid | sed -nE 's,{{ crypt_root }}:\sUUID="([a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12})"\sTYPE="crypto_LUKS",\1,p') systemd.unified_cgroup_hierarchy=0 rd.auto rhgb quiet"
+        GRUB_DISABLE_RECOVERY=true
+        GRUB_ENABLE_BLSCFG=true
+        GRUB_ENABLE_CRYPTODISK=true
+        SUSE_BTRFS_SNAPSHOT_BOOTING=true

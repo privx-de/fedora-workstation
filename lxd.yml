@@ -1,0 +1,29 @@
+- hosts: localhost
+  tasks:
+
+  - name: Enable fedora copr ganto/lxc4
+    command:
+      cmd: dnf copr enable -y ganto/lxc4
+      creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:ganto:lxc4.repo
+      warn: false
+
+  - name: Install LXD
+    dnf:
+      name: lxd
+      state: latest
+
+  - name: Set subuid
+    lineinfile:
+      path: /etc/subuid
+      line: root:1000000:65536
+
+  - name: Set subgid
+    lineinfile:
+      path: /etc/subgid
+      line: root:1000000:65536
+
+  - name: Start LXD
+    systemd:
+      name: lxd
+      state: started
+      enabled: yes

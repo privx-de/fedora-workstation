@@ -16,4 +16,4 @@ fi
 SCRIPT_DIR=$(cd -P -- "$(dirname -- "$SCRIPT")" && pwd -P) || exit 1
 
 # Run ansible
-sudo PLAYBOOK_DIR="$SCRIPT_DIR" ansible-playbook -i hosts "$@"
+sudo PLAYBOOK_DIR="$SCRIPT_DIR" ansible-playbook -v -i hosts "$@"
