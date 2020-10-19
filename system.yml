@@ -49,26 +49,35 @@
       - enpass
       - evolution
       - evolution-etesync
+      - evolution-ews
       - fd-find
+      - fedora-packager
+      - flameshot
+      - gcc
       - gnome-shell-extension-appindicator
       - gnome-tweaks
+      - golang
       - google-chrome-stable
       - grub2-efi-x64
       - grub2-tools
       - htop
+      - inkscape
       - jq
       - iotop
       - kubectl
+      - langpacks-de
       - lpf-spotify-client
       - nmap
       - mdadm
       - neovim
       - openssl
+      - papirus-icon-theme
       - podman
       - pulseeffects
       - python3-dnf-plugin-snapper
       - python3-language-server
       - ripgrep
+      - rpmdevtools
       - rpmfusion-free-release-tainted
       - rpmfusion-nonfree-release-tainted
       - shim-x64
@@ -85,7 +94,6 @@
       dest: /etc/profile.d/alias.sh
       content: |
         # /etc/profile.d/alias.sh
-        alias docker='podman'
         alias dnf='sudo dnf'
         alias k='kubectl'
         alias neovim='nvim'
@@ -102,7 +110,7 @@
 
   - name: /etc/default/grub
     vars:
-      crypt_root: /dev/bcache0
+      crypt_root: /dev/root
     copy:
       dest: /etc/default/grub
       content: |
