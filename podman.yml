@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+
+  - name: Install docker tools
+    dnf:
+      name:
+      - podman
+      - podman-compose
+      - podman-docker
+      state: latest
